@@ -47,7 +47,7 @@ document.querySelector(".buttons-and-operators")
         case "operation":
             // Here we save the number on the display and get the operation
             firstOperand = parseFloat(displayNum.textContent);
-            currentOperation = value; // the operation name, e.g add,subtract,etc.
+            currentOperation = value;
             displayNum.textContent = "0"; // Reset display for the second operand
             break;
 
@@ -87,10 +87,11 @@ document.querySelector(".buttons-and-operators")
                     case "divide":
                         result = secondOperand !== 0
                             ? firstOperand / secondOperand
-                            : "Error"; // Handle divide by zero
+                            : "Error";
                         break;
                 }
-                // I'm limiting the result to 6 decimal numbers 
+
+                // I'm limiting the result to 6 decimal numbers for all operations
                 displayNum.textContent = parseFloat(result.toFixed(6));
                 firstOperand = result; 
                 secondOperand = null;
