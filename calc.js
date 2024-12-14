@@ -14,6 +14,9 @@ document.querySelector(".buttons-and-operators")
 .addEventListener("click", event => {
 
     const button = event.target;
+
+    console.log(button);
+
     const action = button.dataset.action;
     const value = button.dataset.value;
 
@@ -31,8 +34,11 @@ document.querySelector(".buttons-and-operators")
             }
             break;
 
+        case "pi": // Number pi in 5 decimals
+            displayNum.textContent = value;
+            break;
+
         case "dot":
-            // Add a decimal point if not already present
             if (!displayNum.textContent.includes('.')) {
                 displayNum.textContent += '.';
             }
@@ -45,6 +51,21 @@ document.querySelector(".buttons-and-operators")
             displayNum.textContent = "0"; // Reset display for the second operand
             break;
 
+        case "pred": // for square root and other single-input operations
+            firstOperand = parseFloat(displayNum.textContent);
+        
+            if (value === "sqrt") {
+                
+                if (firstOperand < 0) {
+                    displayNum.textContent = "Error"; // Square root of a negative number is invalid
+                } else {
+                    const result = Math.sqrt(firstOperand);
+                    displayNum.textContent = parseFloat(result.toFixed(6));
+                    firstOperand = result;
+                }
+            }
+            break;
+        
         case "equal":
             // once we click on = we save the second operand and make the operation.
             secondOperand = parseFloat(displayNum.textContent);
@@ -68,11 +89,6 @@ document.querySelector(".buttons-and-operators")
                             ? firstOperand / secondOperand
                             : "Error"; // Handle divide by zero
                         break;
-                    
-                    case "pi":
-                        result = "3.14159";
-                        break;
-
                 }
                 // I'm limiting the result to 6 decimal numbers 
                 displayNum.textContent = parseFloat(result.toFixed(6));
