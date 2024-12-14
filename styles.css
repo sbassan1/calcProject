@@ -1,0 +1,111 @@
+body {
+    background-color: rgb(50, 46, 46);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.calculator-container {
+    background-color: rgb(120, 121, 106); /* Optional: background for the calculator */
+    border: 8px solid black; /* Simulate a classic calculator frame */
+    width: 650px; /* Set a fixed width */
+    height: 600px; /* Set a fixed height */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 10px; /* Slight rounding to mimic an old-school style */
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5); /* Shadow for realism */
+}
+
+.header {
+
+    background-color: rgb(235, 235, 162);
+
+    padding: 10px;
+
+    display: flex;
+    justify-content: left;
+
+    font-size: x-large; 
+
+}
+
+.display-window {
+
+    background-color: rgba(167, 242, 112, 0.474);
+    margin: 15px;
+    display: flex;
+    justify-content: end;
+    width: 600px;
+
+    border-color: rgba(44, 106, 44, 0.33);
+    border-style: groove;
+    border-width: 11px;
+}
+
+
+
+.number-display {
+    padding: 10px;
+    height: 55px;
+    font-size: 55px;
+    font-weight: 600;
+    color: rgb(20, 82, 20);
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; 
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+}
+
+.buttons-and-operators {
+
+    background-color: rgb(71, 71, 65);
+    display: flex;
+
+    border-style:solid;
+    border-width: 10px;
+    border-left: 0px;
+    border-right: 0px;
+    border-color: rgb(44, 44, 48);
+}
+
+.operator-button {
+
+    border-radius: 45%;
+    border-style:inset;
+    border-width: 3px;
+    border-color: rgba(114, 111, 111, 0.446);
+    font-size: medium;
+    font-weight: 600;
+    color: whitesmoke;
+    background-color: rgba(103, 84, 46, 0.714);
+    height: 60px;
+    width: 75px;
+
+}
+
+
+.op-numbers{
+
+    display: grid;
+    grid-gap: 5px;
+    grid: 60px / auto auto auto;
+    padding: 16px;
+}
+
+.op-spAct{
+    display: grid;
+    grid: 70px / auto;
+    padding: 16px;
+}
+
+.op-actions {
+    display: grid;
+    grid: auto / 90px auto;
+    padding: 16px;
+}
+

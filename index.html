@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator HTML Proyect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="header"> OLD CALCULATOR THINGY </div>
+        <div class="display-window">
+            <div class="number-display"> </div>
+        </div>
+        <div class="buttons-and-operators">
+            <div class="op-spAct">
+                <button class="operator-button" data-action = "clear" > CL </button> 
+                <button class="operator-button" data-action = "powerOFf" > PWR OFF </button>
+            </div>
+            <div class="op-numbers">
+                <button class="operator-button" data-action= "num" data-value = "1" >1</button>
+                <button class="operator-button" data-action= "num" data-value = "2" >2</button>
+                <button class="operator-button" data-action= "num" data-value = "3" >3</button>
+                <button class="operator-button" data-action= "num" data-value = "4" >4</button>
+                <button class="operator-button" data-action= "num" data-value = "5" >5</button>
+                <button class="operator-button" data-action= "num" data-value = "6" >6</button>
+                <button class="operator-button" data-action= "num" data-value = "7" >7</button>
+                <button class="operator-button" data-action= "num" data-value = "8" >8</button>
+                <button class="operator-button" data-action= "num" data-value = "9" >9</button>    
+                <button class="operator-button" data-action= "num" data-value = "0" >0</button>        
+                <button class="operator-button" data-action="dot" > . </button>
+                <button class="operator-button" data-action = "equal" > = </button>        
+                        
+            </div>
+            <div class="op-actions">
+                <button class="operator-button" data-action= "operation"  data-value = "add"> + </button>
+                <button class="operator-button" data-action= "operation"  data-value = "subtract"> - </button>
+                <button class="operator-button" data-action= "operation"  data-value = "multiply"> x </button>
+                <button class="operator-button" data-action= "operation"  data-value = "divide"> °/. </button>
+                <button class="operator-button" data-action= "operation"  data-value = "pi"> pí </button>
+                <button class="operator-button" data-action= "operation"  data-value = "sqrt"> sqrt() </button>
+            </div>
+        </div>
+
+        <script src="calc.js"></script>
+    </div>
+</body>
+
+
+</html>
