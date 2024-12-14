@@ -6,6 +6,8 @@ displayNum.textContent = "0";
 let firstOperand = null;
 let secondOperand = null;
 let currentOperation = null;
+let poweredOn = true;
+
 
 
 document.querySelector(".buttons-and-operators")
@@ -14,6 +16,9 @@ document.querySelector(".buttons-and-operators")
     const button = event.target;
     const action = button.dataset.action;
     const value = button.dataset.value;
+
+    // This checks if the calculator is powered on, if not we shouldn't be able to make any 
+    if (!poweredOn && action !== "power-off") return;
 
 
     switch (action) {
@@ -44,7 +49,9 @@ document.querySelector(".buttons-and-operators")
             // once we click on = we save the second operand and make the operation.
             secondOperand = parseFloat(displayNum.textContent);
 
+            // currentOperation must be something before and firstOperand must be something too.
             if (currentOperation && firstOperand !== null) {
+
                 let result;
                 switch (currentOperation) {
                     case "add":
@@ -61,8 +68,14 @@ document.querySelector(".buttons-and-operators")
                             ? firstOperand / secondOperand
                             : "Error"; // Handle divide by zero
                         break;
+                    
+                    case "pi":
+                        result = "3.14159";
+                        break;
+
                 }
-                displayNum.textContent = result;
+                // I'm limiting the result to 6 decimal numbers 
+                displayNum.textContent = parseFloat(result.toFixed(6));
                 firstOperand = result; 
                 secondOperand = null;
                 currentOperation = null;
@@ -76,6 +89,20 @@ document.querySelector(".buttons-and-operators")
             secondOperand = null;
             currentOperation = null;
             break;
+
+
+
+
+        case "power-off":
+
+            poweredOn = !poweredOn;
+            if (!poweredOn) {
+                displayNum.textContent = "";
+            } else {
+                displayNum.textContent = "0"; 
+            }
+            break;
+
 
     }
 });
