@@ -25,6 +25,8 @@ document.querySelector(".buttons-and-operators")
 
 
     switch (action) {
+
+
         case "num":
             // This is made to prevent the 0 as the highest decimal, unless there is a dot
             if (displayNum.textContent === "0" || displayNum.textContent === "Error") {
@@ -44,13 +46,6 @@ document.querySelector(".buttons-and-operators")
             }
             break;
 
-        case "operation":
-            // Here we save the number on the display and get the operation
-            firstOperand = parseFloat(displayNum.textContent);
-            currentOperation = value;
-            displayNum.textContent = "0"; // Reset display for the second operand
-            break;
-
         case "pred": // for square root and other single-input operations
             firstOperand = parseFloat(displayNum.textContent);
         
@@ -59,11 +54,52 @@ document.querySelector(".buttons-and-operators")
                 if (firstOperand < 0) {
                     displayNum.textContent = "Error"; // Square root of a negative number is invalid
                 } else {
-                    const result = Math.sqrt(firstOperand);
-                    displayNum.textContent = parseFloat(result.toFixed(6));
-                    firstOperand = result;
+                    displayNum.textContent = parseFloat(Math.sqrt(firstOperand).toFixed(6));
+                    firstOperand = Math.sqrt(firstOperand);
                 }
             }
+            break;
+
+
+        case "operation":
+            const currentNumber = parseFloat(displayNum.textContent); // The current number on display
+            currentOperation = value; // Type of operation, e.g sum, substraction, mul, etc.
+
+            let result = currentNumber;
+
+            if (firstOperand == null){
+                firstOperand = currentNumber;
+            }else{
+                switch(value){
+
+                    case "add":
+                        result = firstOperand + currentNumber;
+                        break;
+                    case "subtract":
+                        result = firstOperand - currentNumber;
+                        break;
+                    case "multiply":
+                        result = firstOperand * currentNumber;
+                        break;
+                    case "divide":
+                        result = secondOperand !== 0
+                            ? firstOperand / currentNumber
+                            : "Error";
+                        break;
+                }
+
+                displayNum.textContent = parseFloat(result.toFixed(6));
+                firstOperand = result;
+            }
+
+            break;
+
+        case "delete": // delete last number
+            displayNum.textContent = displayNum.textContent.slice(0, -1);
+            if(displayNum.textContent == ""){
+                displayNum.textContent = 0;
+            }
+            console.log(displayNum);
             break;
         
         case "equal":
