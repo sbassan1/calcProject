@@ -1,14 +1,14 @@
 let displayNum = document.querySelector(".number-display"); // To change the number on the display
 let displayWindow = document.querySelector(".display-window"); // We use displaywindow for powerOff basically
 
+displayNum.textContent = "0"; // We use 0 as a default number when we use the calculator
+
 let firstOperand = null;        
 let secondOperand = null; 
 let currentOperation = null;
 
 let poweredOn = false;   // I use this to check if the calculator has any power
-displayWindow.style.backgroundColor = "rgba(96, 141, 65, 0.47)"; // Since we begin with the calculator turned off
-
-let isnewNumber = false; // This declares if we're making a new number after an operation.
+let newNumber = true;
 
 let result = 0;
 
@@ -25,56 +25,18 @@ document.querySelector(".buttons-and-operators")
     // This checks if the calculator is powered on, if not we shouldn't be able to make any 
     if (!poweredOn && action !== "power-off") return;
 
+
     switch (action) {
 
         case "num":
-
-            if (displayNum.textContent === "0" || displayNum.textContent === "Error" || !isnewNumber) {
+            // This is made to prevent the 0 as the highest decimal, unless there is a dot
+            if (displayNum.textContent === "0" || displayNum.textContent === "Error" || newNumber === false) {
                 displayNum.textContent = value;
-                isnewNumber = true; // The number we're using is the 'new' number, different than the last one.
+                newNumber = true;
             } else {
                 displayNum.textContent += value;
             }
             break;
-
-            case "operation":
-                // For making the operation and displaying it we should have pressed a new number and operation too! 
-                if (currentOperation && isnewNumber) { // we pressed an operator and number beforehand
-
-                    secondOperand = parseFloat(displayNum.textContent);
-            
-                    switch (currentOperation) {
-                        case "add":
-                            result = firstOperand + secondOperand;
-                            break;
-                        case "subtract":
-                            result = firstOperand - secondOperand;
-                            break;
-                        case "multiply":
-                            result = firstOperand * secondOperand;
-                            break;
-                        case "divide":
-                            if (secondOperand !== 0){
-                                result = firstOperand / secondOperand;
-                            }
-                            else{
-                                result = "Error";
-                            }
-                            break;
-                    }
-            
-                    displayNum.textContent = result;
-                    firstOperand = result; // the result is now the 
-                    secondOperand = null;
-                    currentOperation = value;
-                    isnewNumber = false; // we set this to false so we need to press another number is get a new second operator to use with the result.
-
-                } else { // If no operation is pending, store the current number as the first operand
-                    firstOperand = parseFloat(displayNum.textContent); // we have a first operand
-                    currentOperation = value; // store the operation
-                }
-            
-                break;
 
         case "pi": // pi in 5 decimals, WORKS OK!
 
@@ -103,6 +65,54 @@ document.querySelector(".buttons-and-operators")
             }
             break;
 
+        case "operation":
+            const currentNumber = parseFloat(displayNum.textContent); // The current number on display or first opperand
+            newNumber = true;   // Allow new number to replace the current.
+
+            currentOperation = value; // Type of operation, e.g sum, substraction, mul, etc.
+        
+            
+
+
+            if (firstOperand == null && currentOperation !== null && !newNumber){
+                firstOperand = currentNumber;
+                displayNum.textContent = result;
+                
+            }else{
+                switch(value){
+
+                    case "add":
+                        if(newNumber = true){
+                            result = firstOperand + currentNumber;
+                        }
+                        break;
+                    case "subtract":
+                        if(newNumber = true){
+                            result = firstOperand - currentNumber;
+                        }
+                        break;
+                    case "multiply":
+                        if(newNumber = true){
+                            result = firstOperand * currentNumber;
+                        }
+                        break;
+                    case "divide":
+                        if(newNumber = true){
+                            result = secondOperand !== 0
+                                ? firstOperand / currentNumber
+                                : "Error";
+                        }
+                        break;
+                }
+
+                displayNum.textContent = parseFloat(result.toFixed(6));
+                firstOperand = result;
+
+                newNumber = false;
+            }
+
+            break;
+
         case "delete": // WORKS OK!
             displayNum.textContent = displayNum.textContent.slice(0, -1);
             if(displayNum.textContent == ""){
@@ -112,7 +122,7 @@ document.querySelector(".buttons-and-operators")
             break;
         
         case "equal": // CHECK IF IT WORKS WITH CHAIN OPERATIONS!
-
+            // once we click on = we save the second operand and make the operation.
             secondOperand = parseFloat(displayNum.textContent);
 
             // currentOperation must be something before and firstOperand must be something too.
@@ -129,20 +139,18 @@ document.querySelector(".buttons-and-operators")
                     case "multiply":
                         result = firstOperand * secondOperand;
                         break;
-
                     case "divide":
                         result = secondOperand !== 0
                             ? firstOperand / secondOperand
-                            : "Error"; // Handle division by zero
+                            : "Error";
                         break;
                 }
 
                 // I'm limiting the result to 6 decimal numbers for all operations
-                displayNum.textContent = result;
+                displayNum.textContent = parseFloat(result.toFixed(6));
                 firstOperand = result; 
                 secondOperand = null;
                 currentOperation = null;
-
             }
             break;
 
