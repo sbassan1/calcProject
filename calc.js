@@ -25,7 +25,7 @@ document.querySelector(".buttons-and-operators").addEventListener("click", (even
             if (!isNewNumber || displayNum.textContent === "0" || displayNum.textContent === "Error") {
                 displayNum.textContent = value;
                 isNewNumber = true;
-                awaitingNextOperand = false; // Reset after pressing a number
+                awaitingNextOperand = false; // we reset after pressing a new number
             } else {
                 displayNum.textContent += value;
             }
@@ -55,12 +55,12 @@ document.querySelector(".buttons-and-operators").addEventListener("click", (even
                 secondOperand = null;
                 currentOperation = value;
                 isNewNumber = false;
-                awaitingNextOperand = true; // Await a new number before continuing
+                awaitingNextOperand = true; // we await a new number before continuing
             } else if (!awaitingNextOperand) {
                 firstOperand = parseFloat(displayNum.textContent);
                 currentOperation = value;
                 isNewNumber = false;
-                awaitingNextOperand = true; // Await a new number before accepting another operator
+                awaitingNextOperand = true; // we await a new number before accepting another operator
             }
             break;
 
